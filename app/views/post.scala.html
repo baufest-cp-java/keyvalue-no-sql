@@ -1,0 +1,45 @@
+@(user: String,post: Post,commentForm: Form[Comment])
+
+@import helper._
+
+@main("") {
+	
+	<h1>@post.getTitle()</h1>
+	@post.getCreationDate() Por @post.getAuthor()
+	Comentarios: @post.getComments().size()
+	Likes: <span name="like@post.getPermalink">@post.getLikes().size()</span>
+	<input type="button" value="Me Re Gusta" class="like" name="@post.getPermalink">
+	<hr>
+	@post.getBody()
+	<br/><br/>
+	Tags: 
+	@for(tag <- post.getTags()) {
+  		@tag
+	}
+	<br/>
+	<br/>
+	Comentarios: @if(post.getComments().size == 0) { Ninguno } 
+	<ul style="list-style-type: none;">
+	@for(comment <- post.getComments()) {
+		<li>
+  		<b>Autor</b>: @comment.getAuthor()<br/>
+  		@if(comment.getEmail() != null && !comment.getEmail().isEmpty()) {
+  			Email: @comment.getEmail()<br/>
+  		}
+  		@comment.getBody()
+  		</li>
+  		<br/>
+	}
+	</ul>
+	Agregar un comentario:
+	@form(routes.Application.newComment()) {
+		<input type="hidden" name="author" id="author" value="@user" />
+		@inputText(field = commentForm("email"), args = 'size -> 60)
+		@textarea(field = commentForm("body"), args = 'rows -> 10, 'cols -> 40)
+		<input type="hidden" name="permalink" id="permalink" value="@post.getPermalink()" />
+		
+		<input type="submit" value="Create">
+	}
+	<br/>
+	<a href="/blog">Volver</a>
+}

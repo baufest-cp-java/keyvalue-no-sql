@@ -1,0 +1,32 @@
+# Routes
+# This file defines all application routes (Higher priority routes first)
+# ~~~~
+
+# Home page
+GET     /                           controllers.Application.index()
+
+#Blog
+GET     /signup                     controllers.Application.signup()
+GET     /welcome                    controllers.Application.welcome()
+GET     /login                      controllers.Application.login()
+GET     /logout                     controllers.Application.logout()
+GET     /blog                     	controllers.Application.blog()
+
+POST    /user                     	controllers.Application.newUser()
+
+GET    	/post		               	controllers.Application.postForm()
+GET    	/post/:permalink            controllers.Application.post(permalink)
+POST   	/post                     	controllers.Application.newPost()
+
+POST   	/comment					controllers.Application.newComment()
+
+POST   	/like/:permalink			controllers.Application.like(permalink)
+
+GET 	/leaderboard				controllers.Application.leaderboard()
+
+# Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.at(path="/public", file)
+
+#Mongo
+GET		/mongoTest					controllers.Application.mongoTest()
+

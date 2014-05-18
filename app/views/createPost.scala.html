@@ -1,0 +1,20 @@
+@(user:String,postForm: Form[Post])
+
+@import helper._
+
+@main("Create Post") {
+
+    <h2>Crear Post</h2>
+    
+    @form(routes.Application.newPost()) {
+        
+        @inputText(field = postForm("title"), args = 'size -> 60)
+        
+        @textarea(field = postForm("body"), args = 'rows -> 15, 'cols -> 80)
+        
+        @inputText(field = postForm("tag"), args = 'size -> 30, 'placeholder -> "tag1,tag2,...")
+        
+        <input type="submit" value="Create">
+    }
+
+}

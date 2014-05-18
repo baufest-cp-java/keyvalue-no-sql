@@ -1,0 +1,23 @@
+@(users: Set[String])
+
+@import helper._
+
+@main("Create Post") {
+	
+    <h2><b>LeaderBord - Usuarios con más posts creados</b></h2>
+
+	<table>
+		<tr>
+			<th>Posición</th>
+			<th>Usuario</th>
+		</tr>
+		@for((user,l) <- users.view.zipWithIndex){
+			<tr>
+				<th>@{l + 1}</th>
+				<th>@user</th>
+			</tr>
+		}
+	</table>
+	<br/>
+	<a href="/blog">Volver</a>
+}

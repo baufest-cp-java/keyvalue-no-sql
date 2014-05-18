@@ -1,0 +1,26 @@
+@(user: String,posts: List[Post])
+
+@import helper._
+
+@main("Register User") {
+	
+	<h2>Bienvenido al blog, @user  | <a href="/post">Nuevo Post</a> | <a href="leaderboard">LeaderBoard: #@LeaderBoard.getPosition(user)</a> | <a href="logout">Logout</a></h2>
+	
+    <h2><b>Blog NOSQL</b></h2>
+	
+ 	<ul style="list-style-type: none;">
+  		@posts.map {post =>
+   			<li> 
+   				<h1><a href="/post/@post.getPermalink">@post.getTitle()</a> </h1>
+				@post.getCreationDate() Por @post.getAuthor()
+				Comentarios: @post.getComments().size()
+				Likes: <span name="like@post.getPermalink">@post.getLikes().size()</span>
+				<input type="button" value="Me Re Gusta" class="like" name="@post.getPermalink">
+				<hr>
+				@post.getBody()
+				<br/><br/>
+   			</li>
+  			}
+ 
+ 	</ul>
+}
